@@ -19,8 +19,8 @@ function centerTurtle() {  //Centers the Turtle according to grid size and faces
 }
 
 var i; //Ignore this all it does is declares i to remove errors
-var gridSize = 20;
-var roadSize = 20;
+var gridSize = 10;
+var roadSize = 10;
 
 //Creates fucntion to draw grid for Dev Use Only - Nathan Martin
 function drawDevGrid() {
@@ -75,6 +75,10 @@ function drawRoadCenter() { //Draws a road with a outline for the center road
 	drawRoad();
 }
 
+function drawAllRoads() { //Draws all the roads in a random pattern
+  
+}
+
 centerTurtle();
 drawRoadCenter();
-centerTurtle()
+centerTurtle();

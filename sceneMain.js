@@ -2,8 +2,9 @@
 //When adding code please add a comment above it explaining what the code does and also your name 
 //Good Luck Have Fun (:
 
-//Sets the pen to default values - Nathan Martin
-function penDefault() {
+
+
+function penDefault() { //Sets the pen to default values - Nathan Martin
 	penRGB(0, 0, 0);
 	penWidth(1);
 	penDown();
@@ -11,36 +12,63 @@ function penDefault() {
 	speed(25);
 }
 
-var i;
+function centerTurtle() {  //Centers the Turtle according to grid size and faces the turtle up
+  penUp();
+  moveTo(160, 230);
+  turnTo(0);
+}
+
+var i; //Ignore this all it does is declares i to remove errors
+var gridSize = 10;
+var roadSize = 10;
 
 //Creates fucntion to draw grid for Dev Use Only - Nathan Martin
 function drawDevGrid() {
 	penUp();
 	moveTo(0, 450);
 	penDefault();
-	for(i = getX(); i < 321; i = getX()) {
+	for(i = getX(); i < 321; i = getX()) { //Draws vertical lines
 	  moveForward(450);
 	  turnRight();
-	  moveForward(20);
+	  moveForward(gridSize);
 	  turnRight();
 	  moveForward(450);
 	  turnLeft();
-	  moveForward(20);
+	  moveForward(gridSize);
 	  turnLeft();
 	}
 	penUp();
 	moveTo(0, 450);
 	penDefault();
 	turnRight();
-	for(i = getY(); i > 0; i = getY()) {
+	for(i = getY(); i > 0; i = getY()) { //Draws horizontal lines
 	  moveForward(320);
 	  turnLeft();
-	  moveForward(20);
+	  moveForward(gridSize);
 	  turnLeft();
 	  moveForward(320);
 	  turnRight();
-	  moveForward(20);
+	  moveForward(gridSize);
 	  turnRight();
 	}
 }
 drawDevGrid();
+
+//Draw road function to draw the base module of every road
+function drawRoad() {
+  penDown();
+	penRGB(139, 69, 19);
+	for(i = 0; i < 4; i++) { //Draw road outline
+	  moveForward(roadSize);
+	  turnRight();
+	}
+	moveForward(roadSize/2);
+	turnRight();
+	moveForward(roadSize/2);
+	dot(roadSize/2); //Fills in the road
+	penUp();
+	
+}
+
+centerTurtle();
+drawRoad();

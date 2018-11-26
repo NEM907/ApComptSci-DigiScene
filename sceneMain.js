@@ -8,16 +8,24 @@ function penDefault() {
 	penWidth(1);
 	penDown();
 	show();
+	speed(25);
 }
-x = getX();
+xpos = getX();
 penDefault();
 
 //Creates fucntion to draw grid for Dev Use Only - Nathan Martin
 function drawDevGrid() {
 	penUp();
 	moveTo(0, 450);
-	for(i = x; i < 321; i = x) {
+	for(i = getX(); i < 321; i = getX()) {
 	  moveForward(450);
+	  turnRight();
+	  moveForward();
+	  turnRight();
+	  moveForward(450);
+	  turnLeft();
+	  moveForward();
+	  turnLeft();
 	}
 }
 drawDevGrid();

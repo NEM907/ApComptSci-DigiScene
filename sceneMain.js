@@ -58,9 +58,6 @@ drawDevGrid(); //This will be commented out in the finale version
 function drawRoad() { //Draw road function to draw the base module of every road
   penDown();
   penRGB(139, 69, 19);
-	moveForward(roadSize/2);
-	turnRight();
-	moveForward(roadSize/2);
 	dot(roadSize/2); //Fills in the road
 	penUp();
 }
@@ -69,16 +66,24 @@ function drawRoadCenter() { //Draws a road with a outline for the center road
   penDown();
 	penRGB(218, 165, 32);
 	for(i = 0; i < 4; i++) { //Draw road outline
-	  moveForward(roadSize);
-	  turnRight();
+   moveForward(roadSize);
+   turnRight();
 	}
+	moveForward(roadSize/2);
+  turnRight();
+  moveForward(roadSize/2);
 	drawRoad();
 }
 
 function drawAllRoads() { //Draws all the roads in a random pattern
-  
+  centerTurtle();
+  drawRoadCenter();
+  centerTurtle();
+  turnTo(0);
+  moveForward(roadSize/2);
+  turnRight();
+  moveForward(roadSize/2);
+  turnLeft();
 }
 
-centerTurtle();
-drawRoadCenter();
-centerTurtle();
+drawAllRoads();

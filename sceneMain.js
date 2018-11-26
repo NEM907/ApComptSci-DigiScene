@@ -75,6 +75,20 @@ function drawRoadCenter() { //Draws a road with a outline for the center road
 	drawRoad();
 }
 
+function ranDirection() {
+  direction = randomNumber(0, 3)
+  for() {
+    if(direction == 0) {
+      turnTo(0);
+      moveForward(roadSize);
+    } else if(direction == 0) {
+      turnTo(90);
+      moveForward(roadSize);
+    }
+  }
+
+}
+
 function drawAllRoads() { //Draws all the roads in a random pattern
   centerTurtle();
   drawRoadCenter();
@@ -84,6 +98,7 @@ function drawAllRoads() { //Draws all the roads in a random pattern
   turnRight();
   moveForward(roadSize/2);
   turnLeft();
+  
 }
 
 drawAllRoads();

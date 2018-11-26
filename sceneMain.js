@@ -12,13 +12,13 @@ function penDefault() { //Sets the pen to default values - Nathan Martin
 	speed(25);
 }
 
-function centerTurtle() {  //Centers the Turtle according to grid size and faces the turtle up
+function centerTurtle() {  //Centers the Turtle according to grid size and faces the turtle up - Nathan Martin
   penUp();
   moveTo(160, 230);
   turnTo(0);
 }
 
-var i; //Ignore this all it does is declares i to remove errors
+var i; //Ignore this all it does is declares i to remove errors - Nathan Martin
 var gridSize = 10;
 var roadSize = 10;
 
@@ -27,7 +27,7 @@ function drawDevGrid() {
 	penUp();
 	moveTo(0, 450);
 	penDefault();
-	for(i = getX(); i < 321; i = getX()) { //Draws vertical lines
+	for(i = getX(); i < 321; i = getX()) { //Draws vertical lines 
 	  moveForward(450);
 	  turnRight();
 	  moveForward(gridSize);
@@ -54,7 +54,7 @@ function drawDevGrid() {
 }
 drawDevGrid();
 
-//Draw road function to draw the base module of every road
+//Draw road function to draw the base module of every road - Nathan Martin
 function drawRoad() {
   penDown();
 	penRGB(139, 69, 19);

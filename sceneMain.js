@@ -10,22 +10,37 @@ function penDefault() {
 	show();
 	speed(25);
 }
-xpos = getX();
-penDefault();
+
+var i;
 
 //Creates fucntion to draw grid for Dev Use Only - Nathan Martin
 function drawDevGrid() {
 	penUp();
 	moveTo(0, 450);
+	penDefault();
 	for(i = getX(); i < 321; i = getX()) {
 	  moveForward(450);
 	  turnRight();
-	  moveForward();
+	  moveForward(20);
 	  turnRight();
 	  moveForward(450);
 	  turnLeft();
-	  moveForward();
+	  moveForward(20);
 	  turnLeft();
+	}
+	penUp();
+	moveTo(0, 450);
+	penDefault();
+	turnRight();
+	for(i = getY(); i > 0; i = getY()) {
+	  moveForward(320);
+	  turnLeft();
+	  moveForward(20);
+	  turnLeft();
+	  moveForward(320);
+	  turnRight();
+	  moveForward(20);
+	  turnRight();
 	}
 }
 drawDevGrid();

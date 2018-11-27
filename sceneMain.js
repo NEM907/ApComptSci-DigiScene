@@ -54,7 +54,7 @@ function drawDevGrid() {
     moveTo(0, 450);
     penDefault();
     turnRight();
-    for (var i = getY(); i > 0; i = getY()) { //Draws horizontal lines
+    for (i = getY(); i > 0; i = getY()) { //Draws horizontal lines
         moveForward(320);
         turnLeft();
         moveForward(gridSize);
@@ -145,25 +145,10 @@ function drawAllRoads() {
     turnLeft();
     for (var q = 0; q < 4; q++) {
 
-        direction = randomNumber(0, 3);
-
-        if (direction === 0) {
-            turnTo(0);
+        var direction = randomNumber(0, 3);
+            turnTo(90 * direction);
             centerTurtle();
             ranRoad();
-        } else if (direction === 1) {
-            turnTo(90);
-            centerTurtle();
-            ranRoad();
-        } else if (direction === 2) {
-            turnTo(180);
-            centerTurtle();
-            ranRoad();
-        } else if (direction === 3) {
-            turnTo(270);
-            centerTurtle();
-            ranRoad();
-        }
     }
 }
 

@@ -8,11 +8,11 @@
     var roadSize = 10;
 
     // Colors
-    var backgroundColor = [0, 255, 0]; // Green
+    var backgroundColor = [0, 255, 0]; // HEX: #00FF00 - Bright green - https://www.colorcodehex.com/00ff00/
     var roadCenterColor = [218, 165, 32];  // HEX: #DAA520 - Light brown - https://www.colorcodehex.com/daa520/
-    var penDefaultColor = [0, 0, 0];
-    var roadMiddleColor = [139, 69, 19];
-    var darkGrassColorA = [0, 100, 0, 0.5]; // Dark green, 50% opacity
+    var penDefaultColor = [0, 0, 0]; // HEX: #000000 - Black - https://www.colorcodehex.com/000000/
+    var roadMiddleColor = [139, 69, 19]; // HEX: #8B4513 - Dark brown - https://www.colorcodehex.com/8b4513/
+    var darkGrassColorA = [0, 100, 0, 0.5]; // HEX: #006400 - Dark green, 50% opacity - https://www.colorcodehex.com/006400/
 
 // End of Variable Declarations
 

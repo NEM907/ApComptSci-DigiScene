@@ -21,6 +21,7 @@
 // End of Variable Declarations
 
 
+
 /**
  * Sets the pen color to default values.
  * 
@@ -210,6 +211,7 @@ function drawHouse01Inside(len) {
         dot(roadSize/2);
    }
     moveForward(-roadSize*len/2);
+    dot(roadSize/2);
     for (i = 0; i < len; i++) {
         moveForward(-roadSize/2);
         dot(roadSize/2);
@@ -220,6 +222,19 @@ function drawHouse01Inside(len) {
     turnLeft();
 }
 
+function fillHouse01() {
+    for (h = 0; h < 2; h++) {
+        moveForward(roadSize/2);
+        penUp();
+        turnLeft();
+        drawHouse01Inside(5);
+        drawHouse01Inside(3);
+        drawHouse01Inside(1);
+        turnRight();
+        moveForward(-roadSize*3.5);
+        turnRight(180);
+    }
+}
 /**
  * Draws a house.
  * 
@@ -227,7 +242,7 @@ function drawHouse01Inside(len) {
  * @WIP
  */
 function drawHouse01() {
-    var buildStart = [getX(), getY()]; //The start point of building the house.
+    var buildStart = [getX()-roadSize*2, getY()+roadSize*2]; //The start point of building the house.
     var house01Half = Math.sqrt(Math.pow(roadSize*2, 2)*2); //The distance from buildStart point to center for House01
     penUp();
     turnRight(45);
@@ -236,6 +251,9 @@ function drawHouse01() {
     moveForward(-house01Half);
     turnLeft(45);
     penDefault();
+    fillHouse01();
+    moveTo(buildStart[0], buildStart[1]);
+    penColor("red");
     penDown();
     for (var h = 0; h < 4; h++) {
         turnRight(45);
@@ -278,18 +296,9 @@ function drawHouse01() {
     turnRight(45);
     moveForward(house01Half);
     turnLeft(45);
-    for (h = 0; h < 1; h++) {
-        moveForward(roadSize/2);
-        penUp();
-        turnLeft();
-        drawHouse01Inside(5);
-        drawHouse01Inside(3);
-        drawHouse01Inside(1);
-        turnRight();
-        moveTo(buildCenter[0], buildCenter[1]);
-        turnRight(180);
-        
-    }
+    
+
+
 }
 
 //drawGrass();

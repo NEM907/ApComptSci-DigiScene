@@ -196,19 +196,52 @@ function drawGrass() {
     }
 }
 
+
+
 /**
- * Draws a house background.
+ * Function to simplify the drawing of the house background for House01.
+ * 
+ * @author: Nathan
+ * @WIP
+ */
+function drawHouse01Inside(len) {
+    for (var i = 0; i < len; i++) {
+        moveForward(roadSize/2);
+        dot(roadSize/2);
+   }
+    moveForward(-roadSize*len/2);
+    for (i = 0; i < len; i++) {
+        moveForward(-roadSize/2);
+        dot(roadSize/2);
+    }
+    moveForward(roadSize*len/2);
+    turnRight();
+    moveForward(roadSize);
+    turnLeft();
+}
+
+/**
+ * Draws a house.
  * 
  * @author: Nathan
  * @WIP
  */
 function drawHouse01() {
+    var buildStart = [getX(), getY()]; //The start point of building the house.
+    var house01Half = Math.sqrt(Math.pow(roadSize*2, 2)*2); //The distance from buildStart point to center for House01
+    penUp();
+    turnRight(45);
+    moveForward(house01Half);
+    var buildCenter = [getX(), getY()]; //The center of the house.
+    moveForward(-house01Half);
+    turnLeft(45);
+    penDefault();
     penDown();
     for (var h = 0; h < 4; h++) {
         turnRight(45);
-        moveForward(roadSize*2);
+        moveForward(house01Half);
         penUp();
-        moveForward(-roadSize*2);
+        moveForward(-house01Half);
         turnLeft(45);
         penDown();
         moveForward(roadSize);
@@ -227,20 +260,43 @@ function drawHouse01() {
     moveForward(roadSize*2);
     turnLeft(45);
     penDown();
+    moveForward(roadSize*0.575);
+    turnRight();
+    moveForward(roadSize*0.575);
+    dot(roadSize*0.55);
+    penUp();
+    moveForward(-roadSize*0.575);
+    turnLeft();
+    moveForward(-roadSize*0.575);
+    penDown();
     for (h = 0; h < 4; h++) {
         moveForward(roadSize*1.1);
         turnRight();
     }
     penUp();
-    moveForward(roadSize*0.55);
-    turnRight();
-    moveForward(roadSize*0.55);
-    dot(roadSize*0.55)
+    moveTo(buildStart[0], buildStart[1]);
+    turnRight(45);
+    moveForward(house01Half);
+    turnLeft(45);
+    for (h = 0; h < 1; h++) {
+        moveForward(roadSize/2);
+        penUp();
+        turnLeft();
+        drawHouse01Inside(5);
+        drawHouse01Inside(3);
+        drawHouse01Inside(1);
+        turnRight();
+        moveTo(buildCenter[0], buildCenter[1]);
+        turnRight(180);
+        
+    }
 }
 
-drawGrass();
+//drawGrass();
 drawDevGrid(); //This will be commented out in the finale version
-drawAllRoads();
+//drawAllRoads();
 centerTurtle();
-//drawHouse01();
-hide();
+drawHouse01();
+//hide();
+
+

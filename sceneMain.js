@@ -4,12 +4,17 @@
 
 
 // Variable Declarations
-var gridSize = 10;
-var roadSize = 10;
+    var gridSize = 10;
+    var roadSize = 10;
 // End of Variable Declarations
 
 
-function penDefault() { //Sets the pen to default values - Nathan Martin
+/**
+ * Sets the pen color to default values.
+ * 
+ * @author: Nathan
+ */
+function penDefault() {
     penRGB(0, 0, 0);
     penWidth(1);
     penDown();
@@ -17,13 +22,21 @@ function penDefault() { //Sets the pen to default values - Nathan Martin
     speed(25);
 }
 
-function centerTurtle() { //Centers the Turtle according to grid size and faces the turtle up
+/**
+ * Centers the Turtle according to the grid size and faces the turtle up.
+ */
+function centerTurtle() {
     penUp();
     moveTo(160, 230);
     turnTo(0);
 }
 
-function drawDevGrid() { //Creates fucntion to draw grid for Dev Use Only - Nathan Martin
+/**
+ * Creates function to draw grid (development use only)
+ * 
+ * @author: Nathan
+ */
+function drawDevGrid() {
     penUp();
     moveTo(0, 450);
     penDefault();
@@ -53,14 +66,22 @@ function drawDevGrid() { //Creates fucntion to draw grid for Dev Use Only - Nath
     }
 }
 
-function drawRoadMiddle() { //Draw road function to draw the base module of every road
+/**
+ * Draw road function to draw the base module of every road.
+ */
+function drawRoadMiddle() {
     penDown();
     penRGB(139, 69, 19);
     dot(roadSize / 2); //Fills in the road
     penUp();
 }
 
-function drawRoad() { //Draws a whole road block - Nathan Martin
+/**
+ * Draws a whole road block.
+ * 
+ * @author: Nathan
+ */
+function drawRoad() {
     penDown();
     penRGB(139, 69, 19);
     for (var i = 0; i < 4; i++) { //Draw road outline
@@ -76,10 +97,13 @@ function drawRoad() { //Draws a whole road block - Nathan Martin
     moveForward(-roadSize / 2);
 }
 
-function drawRoadCenter() { //Draws a road with a outline for the center road
+/**
+ * Draws a road with an outline for the center road.
+ */
+function drawRoadCenter() {
     penDown();
     penRGB(218, 165, 32);
-    for (var i = 0; i < 4; i++) { //Draw road outline
+    for (var i = 0; i < 4; i++) { // Draw road outline
         moveForward(roadSize);
         turnRight();
     }
@@ -89,9 +113,14 @@ function drawRoadCenter() { //Draws a road with a outline for the center road
     drawRoadMiddle();
 }
 
-function ranRoad() { //Random road pathing - Nathan Martin
+/**
+ * Random road pathing.
+ * 
+ * @author: Nathan
+ */
+function ranRoad() {
 
-    var roadsPerPath = randomNumber(50, 100); //Random number for the number of roads drawn
+    var roadsPerPath = randomNumber(50, 100); // Random number for the number of roads drawn
 
     for (var r = 0; r < roadsPerPath; r++) {
 
@@ -102,7 +131,10 @@ function ranRoad() { //Random road pathing - Nathan Martin
     }
 }
 
-function drawAllRoads() { //Draws all the roads in a random pattern
+/**
+ * Draws all the roads in a random pattern.
+ */
+function drawAllRoads() {
     centerTurtle();
     drawRoadCenter();
     centerTurtle();
@@ -135,12 +167,22 @@ function drawAllRoads() { //Draws all the roads in a random pattern
     }
 }
 
-function ranPostion() { //Randomizes the postion of the turtle - Nathan Martin
+/**
+ * Randomizes the position of the turtle.
+ * 
+ * @author: Nathan
+ */
+function ranPostion() {
     penUp();
     moveTo(randomNumber(0, 319), randomNumber(0, 449));
 }
 
-function drawGrass() { //Draws a grass background - Nathan Martin
+/**
+ * Draws a grass background.
+ * 
+ * @author: Nathan
+ */
+function drawGrass() {
     centerTurtle();
     penDown();
     penRGB(0, 255, 0);

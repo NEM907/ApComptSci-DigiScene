@@ -3,6 +3,17 @@
 //Good Luck Have Fun (:
 
 
+//Variable Declarations
+var i; //Ignore this all it does is declare i to remove errors
+var q; //Ignore this all it does is declare q to remove errors
+var r; //Ignore this all it does is declare r to remove errors
+var g; //Ignore this all it does is declare g to remove errors
+var maxDarkGrass; //Ignore this all it does is declare maxDarkGrass to remove errors
+var direction; //Ignore this all it does is delcare direction to remove errors
+var gridSize = 10;
+var roadSize = 10;
+//End of Variable Declarations
+
 
 function penDefault() { //Sets the pen to default values - Nathan Martin
 	penRGB(0, 0, 0);
@@ -12,20 +23,13 @@ function penDefault() { //Sets the pen to default values - Nathan Martin
 	speed(25);
 }
 
-function centerTurtle() {  //Centers the Turtle according to grid size and faces the turtle up
+function centerTurtle() { //Centers the Turtle according to grid size and faces the turtle up
   penUp();
   moveTo(160, 230);
   turnTo(0);
 }
 
-var i; //Ignore this all it does is declare i to remove errors
-var q; //Ignore this all it does is declare q to remove errors
-var direction; //Ignore this all it does is delcare direction to remove errors
-var gridSize = 10;
-var roadSize = 10;
-
-//Creates fucntion to draw grid for Dev Use Only - Nathan Martin
-function drawDevGrid() {
+function drawDevGrid() { //Creates fucntion to draw grid for Dev Use Only - Nathan Martin
 	penUp();
 	moveTo(0, 450);
 	penDefault();
@@ -152,12 +156,23 @@ function drawAllRoads() { //Draws all the roads in a random pattern
   }
 }
 
+function ranPostion() { //Randomizes the postion of the turtle - Nathan Martin
+  penUp();
+  moveTo(randomNumber(0, 319), randomNumber(0, 449));
+}
+
 function drawGrass() { //Draws a grass background - Nathan Martin
   centerTurtle();
   penDown();
   penRGB(0, 255, 0);
   dot(1000);
-  penUp();
+  maxDarkGrass = randomNumber(200, 300);
+  for(g = 0; g < maxDarkGrass; g++) {
+    ranPostion();
+    penDown();
+    penRGB(0, 100, 0, .5);
+    dot(randomNumber(1, 2.5));
+  }
 }
 
 

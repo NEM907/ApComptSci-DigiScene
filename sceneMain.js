@@ -7,6 +7,9 @@
     var gridSize = 10;
     var roadSize = 10;
 
+    var roadsPerPath = randomNumber(50, 100); // Number of roads to draw.
+    var maxDarkGrass = randomNumber(200, 300); // Amount of dark grass to draw on background layer.
+
     // Colors
     var backgroundColor = [0, 255, 0]; // HEX: #00FF00 - Bright green - https://www.colorcodehex.com/00ff00/
     var roadCenterColor = [218, 165, 32];  // HEX: #DAA520 - Light brown - https://www.colorcodehex.com/daa520/
@@ -128,11 +131,7 @@ function drawRoadCenter() {
  * @author: Nathan
  */
 function ranRoad() {
-
-    var roadsPerPath = randomNumber(50, 100); // Random number for the number of roads drawn
-
     for (var r = 0; r < roadsPerPath; r++) {
-
         var direction = randomNumber(0, 4);
         turnTo(90 * direction);
         moveForward(roadSize);
@@ -153,11 +152,10 @@ function drawAllRoads() {
     moveForward(roadSize);
     turnLeft();
     for (var q = 0; q < 4; q++) {
-
         var direction = randomNumber(0, 3);
-            turnTo(90 * direction);
-            centerTurtle();
-            ranRoad();
+        turnTo(90 * direction);
+        centerTurtle();
+        ranRoad();
     }
 }
 
@@ -181,7 +179,6 @@ function drawGrass() {
     penDown();
     penRGB(backgroundColor[0], backgroundColor[1], backgroundColor[2]);
     dot(1000);
-    var maxDarkGrass = randomNumber(200, 300);
     for (var g = 0; g < maxDarkGrass; g++) {
         ranPostion();
         penDown();

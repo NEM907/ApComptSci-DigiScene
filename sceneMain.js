@@ -3,16 +3,10 @@
 //Good Luck Have Fun (:
 
 
-//Variable Declarations
-var i; //Ignore this all it does is declare i to remove errors
-var q; //Ignore this all it does is declare q to remove errors
-var r; //Ignore this all it does is declare r to remove errors
-var g; //Ignore this all it does is declare g to remove errors
-var maxDarkGrass; //Ignore this all it does is declare maxDarkGrass to remove errors
-var direction; //Ignore this all it does is delcare direction to remove errors
-var gridSize = 10;
-var roadSize = 10;
-//End of Variable Declarations
+// Variable Declarations
+	var gridSize = 10;
+	var roadSize = 10;
+// End of Variable Declarations
 
 
 function penDefault() { //Sets the pen to default values - Nathan Martin
@@ -33,7 +27,7 @@ function drawDevGrid() { //Creates fucntion to draw grid for Dev Use Only - Nath
 	penUp();
 	moveTo(0, 450);
 	penDefault();
-	for(i = getX(); i < 321; i = getX()) { //Draws vertical lines
+	for(var i = getX(); i < 321; i = getX()) { //Draws vertical lines
 	  moveForward(450);
 	  turnRight();
 	  moveForward(gridSize);
@@ -47,7 +41,7 @@ function drawDevGrid() { //Creates fucntion to draw grid for Dev Use Only - Nath
 	moveTo(0, 450);
 	penDefault();
 	turnRight();
-	for(i = getY(); i > 0; i = getY()) { //Draws horizontal lines
+	for(var i = getY(); i > 0; i = getY()) { //Draws horizontal lines
 	  moveForward(320);
 	  turnLeft();
 	  moveForward(gridSize);
@@ -69,7 +63,7 @@ function drawRoadMiddle() { //Draw road function to draw the base module of ever
 function drawRoad() { //Draws a whole road block - Nathan Martin
   penDown();
   penRGB(139, 69, 19);
-  for(i = 0; i < 4; i++) { //Draw road outline
+  for(var i = 0; i < 4; i++) { //Draw road outline
    moveForward(roadSize);
    turnRight();
 	}
@@ -85,13 +79,13 @@ function drawRoad() { //Draws a whole road block - Nathan Martin
 function drawRoadCenter() { //Draws a road with a outline for the center road
   penDown();
 	penRGB(218, 165, 32);
-	for(i = 0; i < 4; i++) { //Draw road outline
-   moveForward(roadSize);
-   turnRight();
+	for(var i = 0; i < 4; i++) { //Draw road outline
+	   moveForward(roadSize);
+	   turnRight();
 	}
 	moveForward(roadSize/2);
-  turnRight();
-  moveForward(roadSize/2);
+	turnRight();
+	moveForward(roadSize/2);
 	drawRoadMiddle();
 }
 
@@ -99,27 +93,12 @@ function ranRoad() { //Random road pathing - Nathan Martin
   
   var roadsPerPath = randomNumber(50, 100); //Random number for the number of roads drawn
   
-  for(r = 0; r < roadsPerPath; r++) {
+  for(var r = 0; r < roadsPerPath; r++) {
     
-    direction = randomNumber(0, 4);
-    
-    if(direction === 0 || direction === 4) {
-      turnTo(0);
-      moveForward(roadSize);
-      drawRoad();
-    } else if(direction === 1) {
-      turnTo(90);
-      moveForward(roadSize);
-      drawRoad();
-    } else if(direction === 2) {
-      turnTo(180);
-      moveForward(roadSize);
-      drawRoad();
-    } else if(direction === 3) {
-      turnTo(270);
-      moveForward(roadSize);
-      drawRoad();
-    }
+    var direction = randomNumber(0, 4);
+  	turnTo(90 * direction);
+	moveForward(roadSize);
+	drawRoad();
   }
 }
 
@@ -132,7 +111,7 @@ function drawAllRoads() { //Draws all the roads in a random pattern
   turnRight();
   moveForward(roadSize);
   turnLeft();
-  for(q = 0; q < 4; q++) {
+  for(var q = 0; q < 4; q++) {
     
     direction = randomNumber(0, 3);
     
@@ -166,8 +145,8 @@ function drawGrass() { //Draws a grass background - Nathan Martin
   penDown();
   penRGB(0, 255, 0);
   dot(1000);
-  maxDarkGrass = randomNumber(200, 300);
-  for(g = 0; g < maxDarkGrass; g++) {
+  var maxDarkGrass = randomNumber(200, 300);
+  for(var g = 0; g < maxDarkGrass; g++) {
     ranPostion();
     penDown();
     penRGB(0, 100, 0, .5);

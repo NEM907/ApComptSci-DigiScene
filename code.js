@@ -7,7 +7,7 @@
     var gridSize = 10;
     var roadSize = 10;
 
-    var roadsPerPath = randomNumber(50, 100); // Number of roads to draw.
+    var roadsPerPath = randomNumber(200, 500); // Number of roads to draw.
     var maxDarkGrass = randomNumber(200, 300); // Amount of dark grass to draw on background layer.
 
     // Colors
@@ -16,7 +16,8 @@
     var penDefaultColor = [0, 0, 0]; // HEX: #000000 - Black - https://www.colorcodehex.com/000000/
     var roadMiddleColor = [139, 69, 19]; // HEX: #8B4513 - Dark brown - https://www.colorcodehex.com/8b4513/
     var darkGrassColorA = [0, 100, 0, 0.5]; // HEX: #006400 - Dark green, 50% opacity - https://www.colorcodehex.com/006400/
-
+    var wellColor01 = [97, 97, 97]; // HEX: #616161 - Gray - https://www.colorcodehex.com/616161/
+    var wellColor02 = [41, 41, 96]; // HEX: #292960 - Dark Blue - https://www.colorcodehex.com/292960/
 // End of Variable Declarations
 
 
@@ -30,7 +31,7 @@ function penDefault() {
     penWidth(1);
     penDown();
     show();
-    speed(25);
+    speed(100);
 }
 
 /**
@@ -95,6 +96,7 @@ function drawRoadMiddle() {
  */
 function drawRoad() {
     penDown();
+    penWidth(3);
     penRGB(roadMiddleColor[0], roadMiddleColor[1], roadMiddleColor[2]);
     for (var i = 0; i < 4; i++) { //Draw road outline
         moveForward(roadSize);
@@ -110,7 +112,7 @@ function drawRoad() {
 }
 
 /**
- * Draws a road with an outline for the center road.
+ * Draws a center peice for the town.
  */
 function drawRoadCenter() {
     penDown();
@@ -123,6 +125,12 @@ function drawRoadCenter() {
     turnRight();
     moveForward(roadSize / 2);
     drawRoadMiddle();
+    penRGB(roadMiddleColor[0], roadMiddleColor[1], roadMiddleColor[2]);
+    dot(25);
+    penRGB(wellColor01[0], wellColor01[1], wellColor01[2]);
+    dot(10);
+    penRGB(wellColor02[0], wellColor02[1], wellColor02[2]);
+    dot(7.5);
 }
 
 /**
@@ -132,7 +140,7 @@ function drawRoadCenter() {
  */
 function ranRoad() {
     for (var r = 0; r < roadsPerPath; r++) {
-        var direction = randomNumber(0, 4);
+        var direction = randomNumber(0, 3);
         turnTo(90 * direction);
         moveForward(roadSize);
         drawRoad();
@@ -144,19 +152,18 @@ function ranRoad() {
  */
 function drawAllRoads() {
     centerTurtle();
-    drawRoadCenter();
-    centerTurtle();
     turnTo(0);
     moveForward(roadSize);
     turnRight();
     moveForward(roadSize);
     turnLeft();
     for (var q = 0; q < 4; q++) {
-        var direction = randomNumber(0, 3);
-        turnTo(90 * direction);
+        turnTo(90 * q);
         centerTurtle();
         ranRoad();
     }
+    centerTurtle();
+    drawRoadCenter();
 }
 
 /**
@@ -191,3 +198,4 @@ function drawGrass() {
 drawGrass();
 drawDevGrid(); //This will be commented out in the finale version
 drawAllRoads();
+hide();

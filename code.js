@@ -149,6 +149,8 @@ function ranRoad() {
 
 /**
  * Draws all the roads in a random pattern.
+ * 
+ * @author: Nathan
  */
 function drawAllRoads() {
     centerTurtle();
@@ -194,8 +196,51 @@ function drawGrass() {
     }
 }
 
+/**
+ * Draws a house background.
+ * 
+ * @author: Nathan
+ * @WIP
+ */
+function drawHouse01() {
+    penDown();
+    for (var h = 0; h < 4; h++) {
+        turnRight(45);
+        moveForward(roadSize*2);
+        penUp();
+        moveForward(-roadSize*2);
+        turnLeft(45);
+        penDown();
+        moveForward(roadSize);
+        turnLeft();
+        moveForward(roadSize);
+        turnRight();
+        moveForward(roadSize*2);
+        turnRight();
+        moveForward(roadSize);
+        turnLeft();
+        moveForward(roadSize);
+        turnRight();
+    }
+    penUp();
+    turnRight(45);
+    moveForward(roadSize*2);
+    turnLeft(45);
+    penDown();
+    for (h = 0; h < 4; h++) {
+        moveForward(roadSize*1.1);
+        turnRight();
+    }
+    penUp();
+    moveForward(roadSize*0.55);
+    turnRight();
+    moveForward(roadSize*0.55);
+    dot(roadSize*0.55)
+}
 
 drawGrass();
 drawDevGrid(); //This will be commented out in the finale version
 drawAllRoads();
+centerTurtle();
+//drawHouse01();
 hide();

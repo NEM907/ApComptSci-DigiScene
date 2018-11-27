@@ -18,7 +18,9 @@ function centerTurtle() {  //Centers the Turtle according to grid size and faces
   turnTo(0);
 }
 
-var i; //Ignore this all it does is declares i to remove errors
+var i; //Ignore this all it does is declare i to remove errors
+var q; //Ignore this all it does is declare q to remove errors
+var direction; //Ignore this all it does is delcare direction to remove errors
 var gridSize = 10;
 var roadSize = 10;
 
@@ -53,13 +55,27 @@ function drawDevGrid() {
 	}
 }
 
-drawDevGrid(); //This will be commented out in the finale version
-
-function drawRoad() { //Draw road function to draw the base module of every road
+function drawRoadMiddle() { //Draw road function to draw the base module of every road
   penDown();
   penRGB(139, 69, 19);
 	dot(roadSize/2); //Fills in the road
 	penUp();
+}
+
+function drawRoad() { //Draws a whole road block - Nathan Martin
+  penDown();
+  penRGB(139, 69, 19);
+  for(i = 0; i < 4; i++) { //Draw road outline
+   moveForward(roadSize);
+   turnRight();
+	}
+	moveForward(roadSize/2);
+  turnRight();
+  moveForward(roadSize/2);
+	drawRoadMiddle();
+	moveForward(-roadSize/2);
+	turnLeft();
+	moveForward(-roadSize/2);
 }
 
 function drawRoadCenter() { //Draws a road with a outline for the center road
@@ -72,27 +88,30 @@ function drawRoadCenter() { //Draws a road with a outline for the center road
 	moveForward(roadSize/2);
   turnRight();
   moveForward(roadSize/2);
-	drawRoad();
+	drawRoadMiddle();
 }
 
-function ranRoad() {
-  for(i = 0; i < 20; i++) {
+function ranRoad() { //Random road pathing - Nathan Martin
+  
+  var roadsPerPath = randomNumber(50, 100); //Random number for the number of roads drawn
+  
+  for(r = 0; r < roadsPerPath; r++) {
     
-    direction = randomNumber(0, 3);
+    direction = randomNumber(0, 4);
     
-    if(direction == 0) {
+    if(direction === 0 || direction === 4) {
       turnTo(0);
       moveForward(roadSize);
       drawRoad();
-    } else if(direction == 1) {
+    } else if(direction === 1) {
       turnTo(90);
       moveForward(roadSize);
       drawRoad();
-    } else if(direction == 2) {
+    } else if(direction === 2) {
       turnTo(180);
       moveForward(roadSize);
       drawRoad();
-    } else if(direction == 3) {
+    } else if(direction === 3) {
       turnTo(270);
       moveForward(roadSize);
       drawRoad();
@@ -105,12 +124,43 @@ function drawAllRoads() { //Draws all the roads in a random pattern
   drawRoadCenter();
   centerTurtle();
   turnTo(0);
-  moveForward(roadSize/2);
+  moveForward(roadSize);
   turnRight();
-  moveForward(roadSize/2);
+  moveForward(roadSize);
   turnLeft();
-  ranRoad();
-  
+  for(q = 0; q < 4; q++) {
+    
+    direction = randomNumber(0, 3);
+    
+    if(direction === 0) {
+      turnTo(0);
+      centerTurtle();
+      ranRoad();
+    } else if(direction === 1) {
+      turnTo(90);
+      centerTurtle();
+      ranRoad();
+    } else if(direction === 2) {
+      turnTo(180);
+      centerTurtle();
+      ranRoad();
+    } else if(direction === 3) {
+      turnTo(270);
+      centerTurtle();
+      ranRoad();
+    }
+  }
 }
 
+function drawGrass() { //Draws a grass background - Nathan Martin
+  centerTurtle();
+  penDown();
+  penRGB(0, 255, 0);
+  dot(1000);
+  penUp();
+}
+
+
+drawGrass();
+drawDevGrid(); //This will be commented out in the finale version
 drawAllRoads();

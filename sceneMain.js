@@ -6,6 +6,14 @@
 // Variable Declarations
     var gridSize = 10;
     var roadSize = 10;
+
+    // Colors
+    var backgroundColor = [0, 255, 0]; // Green
+    var roadCenterColor = [218, 165, 32];  // HEX: #DAA520 - Light brown - https://www.colorcodehex.com/daa520/
+    var penDefaultColor = [0, 0, 0];
+    var roadMiddleColor = [139, 69, 19];
+    var darkGrassColorA = [0, 100, 0, 0.5]; // Dark green, 50% opacity
+
 // End of Variable Declarations
 
 
@@ -15,7 +23,7 @@
  * @author: Nathan
  */
 function penDefault() {
-    penRGB(0, 0, 0); // Black
+    penRGB(penDefaultColor[0], penDefaultColor[1], penDefaultColor[2]);
     penWidth(1);
     penDown();
     show();
@@ -72,7 +80,7 @@ function drawDevGrid() {
  */
 function drawRoadMiddle() {
     penDown();
-    penRGB(139, 69, 19);
+    penRGB(roadMiddleColor[0], roadMiddleColor[1], roadMiddleColor[2]);
     dot(roadSize / 2); //Fills in the road
     penUp();
 }
@@ -84,7 +92,7 @@ function drawRoadMiddle() {
  */
 function drawRoad() {
     penDown();
-    penRGB(139, 69, 19);
+    penRGB(roadMiddleColor[0], roadMiddleColor[1], roadMiddleColor[2]);
     for (var i = 0; i < 4; i++) { //Draw road outline
         moveForward(roadSize);
         turnRight();
@@ -103,7 +111,7 @@ function drawRoad() {
  */
 function drawRoadCenter() {
     penDown();
-    penRGB(218, 165, 32); // HEX: #DAA520 - Light brown - https://www.colorcodehex.com/daa520/
+    penRGB(roadCenterColor[0], roadCenterColor[1], roadCenterColor[2]);
     for (var i = 0; i < 4; i++) { // Draw road outline
         moveForward(roadSize);
         turnRight();
@@ -171,13 +179,13 @@ function ranPostion() {
 function drawGrass() {
     centerTurtle();
     penDown();
-    penRGB(0, 255, 0);
+    penRGB(backgroundColor[0], backgroundColor[1], backgroundColor[2]);
     dot(1000);
     var maxDarkGrass = randomNumber(200, 300);
     for (var g = 0; g < maxDarkGrass; g++) {
         ranPostion();
         penDown();
-        penRGB(0, 100, 0, 0.5); // Green at 50% opacity.
+        penRGB(darkGrassColorA[0], darkGrassColorA[1], darkGrassColorA[2], darkGrassColorA[3]);
         dot(randomNumber(1, 2.5));
     }
 }

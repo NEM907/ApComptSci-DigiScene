@@ -15,7 +15,7 @@
  * @author: Nathan
  */
 function penDefault() {
-    penRGB(0, 0, 0);
+    penRGB(0, 0, 0); // Black
     penWidth(1);
     penDown();
     show();
@@ -34,6 +34,7 @@ function centerTurtle() {
 /**
  * Creates function to draw grid (development use only)
  * 
+ * @deprecated
  * @author: Nathan
  */
 function drawDevGrid() {
@@ -102,7 +103,7 @@ function drawRoad() {
  */
 function drawRoadCenter() {
     penDown();
-    penRGB(218, 165, 32);
+    penRGB(218, 165, 32); // HEX: #DAA520 - Light brown - https://www.colorcodehex.com/daa520/
     for (var i = 0; i < 4; i++) { // Draw road outline
         moveForward(roadSize);
         turnRight();
@@ -176,7 +177,7 @@ function drawGrass() {
     for (var g = 0; g < maxDarkGrass; g++) {
         ranPostion();
         penDown();
-        penRGB(0, 100, 0, .5);
+        penRGB(0, 100, 0, 0.5); // Green at 50% opacity.
         dot(randomNumber(1, 2.5));
     }
 }

@@ -185,36 +185,41 @@ function drawAllRoads() {
  * 
  * @author: Nathan
  */
-function ranPostion() {
+function ranPosition() {
     penUp();
     moveTo(randomNumber(0, 319), randomNumber(0, 449));
 }
 
-
-function drawGrass() { //Draws a grass background - Clayton Ramey
+/**
+ * Draws a grass background.
+ * 
+ * @author: Nathan
+ */
+function drawGrass() {
     centerTurtle();
     penDown();
-    penRGB(0, 220, 0);
+    penRGB(backgroundColor[0], backgroundColor[1], backgroundColor[2]);
     dot(1000);
-    maxDarkGrass = randomNumber (200,300);
-    for (g =0; g < maxDarkGrass; g++)  {
+    for (var g = 0; g < maxDarkGrass; g++) {
         ranPosition();
         penDown();
-        penRGB(0, 70, 0, .8);
-        dot (randomNumber(1.5, 3));
+        penRGB(darkGrassColorA[0], darkGrassColorA[1], darkGrassColorA[2], darkGrassColorA[3]);
+        dot(randomNumber(1, 2.5));
     }
 }
+
 function drawRocks() { //Draws textured rocks in the background -Clayton Ramey
   
   centerTurtle();
   var maxRocks = randomNumber(10, 25);
   for (var g = 0; g < maxRocks; g++) {
- ranPostion();
- penDown();
- penRGB(randomNumber(20, 40), randomNumber(20, 40), randomNumber(20, 40));
- dot(randomNumber(2, 12));
+      ranPosition();
+      penDown();
+      penRGB(randomNumber(20, 40), randomNumber(20, 40), randomNumber(20, 40));
+      dot(randomNumber(2, 12));
   }
 }
+
 /**
  * Function to simplify the drawing of the house background for House01.
  * 
@@ -323,53 +328,15 @@ function drawAllHouses() {
     }
 }
 
+function nameTown() {
+    var nameListPart01 = ["Stone", "Fire", "Gold", "Steel", "Dirt", "Grain", "Feild"];
+    var nameListPart02 = ["Town", "City", "Hearth", "Farm", "Home"]
+    var randomName = nameListPart01[0, randomNumber(nameListPart01.length)]
+}
 
 hide();
+
 drawGrass();
-drawDevGrid(); //This will be commented out in the finale version
+//drawDevGrid(); //This will be commented out in the finale version
 drawAllRoads();
 drawAllHouses();
-
-/**
- * Object to contain details about an object with collision.
- * 
- * @author: Tanner
- */
-var CollisionObject = {
-  x: 0,
-  y: 0,
-  radius: 0,
-  
-  setProperties: function(x, y, radius) {
-    this.x = x;
-    this.y = y;
-    this.radius = radius;
-  },
-  
-  getProperties: function() {
-    return [ this.x, this.y, this.radius ];
-  },
-  
-  getCollision: function(x, y, radius) {
-    return Math.abs(this.radius - radius) <= Math.sqrt((this.x - x)^2 + (this.y - y)^2) <= (this.radius + radius);
-  }
-};
-
-/**
- * Object container for CollisionObjects.
- * 
- * @author: Tanner
- */
-var Collision = {
-  objects: new Array(0),
-  
-  isCollision: function(x, y, radius) {
-    this.objects.forEach(function(object) {
-      if(object.getCollision(x, y, radius)) {
-        return true;
-      }
-    });
-    
-    return false;
-  }
-};

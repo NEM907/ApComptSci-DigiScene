@@ -18,6 +18,8 @@
     var darkGrassColorA = [0, 100, 0, 0.5]; // HEX: #006400 - Dark green, 50% opacity - https://www.colorcodehex.com/006400/
     var wellColor01 = [97, 97, 97]; // HEX: #616161 - Gray - https://www.colorcodehex.com/616161/
     var wellColor02 = [41, 41, 96]; // HEX: #292960 - Dark Blue - https://www.colorcodehex.com/292960/
+    var drawHouse01Color01 = [150, 111, 51]; // HEX: #966f33 - Wood Brown - https://www.colorcodehex.com/966f33/
+    var drawHouse01Color02 = [112, 83, 38]; // HEX: #705326 - Dark Wood Brown - https://www.colorcodehex.com/705326/
 // End of Variable Declarations
 
 
@@ -31,7 +33,7 @@ function penDefault() {
     penRGB(penDefaultColor[0], penDefaultColor[1], penDefaultColor[2]);
     penWidth(1);
     penDown();
-    show();
+    hide();
     speed(100);
 }
 
@@ -42,6 +44,15 @@ function centerTurtle() {
     penUp();
     moveTo(160, 230);
     turnTo(0);
+}
+
+/**
+ * Places the Turtle in a random postion and turns to a random direction.
+ */
+function ranTurtle() {
+    penUp();
+    moveTo(randomNumber(0, 320), randomNumber(0,449));
+    turnTo(randomNumber(0,359));
 }
 
 /**
@@ -223,7 +234,7 @@ function drawHouse01Inside(len) {
 }
 
 function fillHouse01() {
-    for (h = 0; h < 2; h++) {
+    for (var h = 0; h < 2; h++) {
         moveForward(roadSize/2);
         penUp();
         turnLeft();
@@ -242,70 +253,77 @@ function fillHouse01() {
  * @WIP
  */
 function drawHouse01() {
-    var buildStart = [getX()-roadSize*2, getY()+roadSize*2]; //The start point of building the house.
+    var buildStartDirection = getDirection();
+    var buildStart = [getX(), getY()]; //The start point of building the house.
     var house01Half = Math.sqrt(Math.pow(roadSize*2, 2)*2); //The distance from buildStart point to center for House01
     penUp();
     turnRight(45);
     moveForward(house01Half);
     var buildCenter = [getX(), getY()]; //The center of the house.
-    moveForward(-house01Half);
     turnLeft(45);
-    penDefault();
+    moveTo(buildCenter[0], buildCenter[1]);
+    penRGB(drawHouse01Color02[0], drawHouse01Color02[1], drawHouse01Color02[2]);
     fillHouse01();
-    moveTo(buildStart[0], buildStart[1]);
-    penColor("red");
-    penDown();
-    for (var h = 0; h < 4; h++) {
-        turnRight(45);
-        moveForward(house01Half);
+    for (var q = 0; q < 2; q++) {
         penUp();
-        moveForward(-house01Half);
-        turnLeft(45);
+        moveTo(buildStart[0], buildStart[1]);
+        if (q === 0) {
+            turnTo(buildStartDirection);
+        } else if (q === 1) {
+            turnTo(buildStartDirection);
+        }
+        penRGB(drawHouse01Color01[0], drawHouse01Color01[1], drawHouse01Color01[2]);
         penDown();
-        moveForward(roadSize);
-        turnLeft();
-        moveForward(roadSize);
-        turnRight();
-        moveForward(roadSize*2);
-        turnRight();
-        moveForward(roadSize);
-        turnLeft();
-        moveForward(roadSize);
-        turnRight();
+        for (var h = 0; h < 4; h++) {
+            turnRight(45);
+            moveForward(house01Half);
+            penUp();
+            moveForward(-house01Half);
+            turnLeft(45);
+            penDown();
+            moveForward(roadSize);
+            turnLeft();
+            moveForward(roadSize);
+            turnRight();
+            moveForward(roadSize*2);
+            turnRight();
+            moveForward(roadSize);
+            turnLeft();
+            moveForward(roadSize);
+            turnRight();
+        }
     }
     penUp();
     turnRight(45);
     moveForward(roadSize*2);
     turnLeft(45);
     penDown();
-    moveForward(roadSize*0.575);
-    turnRight();
-    moveForward(roadSize*0.575);
-    dot(roadSize*0.55);
-    penUp();
-    moveForward(-roadSize*0.575);
-    turnLeft();
-    moveForward(-roadSize*0.575);
-    penDown();
-    for (h = 0; h < 4; h++) {
-        moveForward(roadSize*1.1);
-        turnRight();
-    }
+    moveTo(buildCenter[0], buildCenter[1]);
+    dot(roadSize*0.20);
     penUp();
     moveTo(buildStart[0], buildStart[1]);
     turnRight(45);
     moveForward(house01Half);
     turnLeft(45);
-    
+    moveTo(buildStart[0], buildStart[1]);
 
 
 }
 
-//drawGrass();
+function drawAllHouses() {
+    var maxHouses = randomNumber(1, 10);
+    for (var q = 0; q < maxHouses; q++) {
+        ranTurtle();
+        drawHouse01();
+    }
+}
+
+
+hide();
+drawGrass();
 drawDevGrid(); //This will be commented out in the finale version
-//drawAllRoads();
-centerTurtle();
-drawHouse01();
-//hide();
+drawAllRoads();
+drawAllHouses();
+
 
 

@@ -37,6 +37,7 @@ function penDefault() {
     speed(100);
 }
 
+
 /**
  * Centers the Turtle according to the grid size and faces the turtle up.
  */
@@ -330,8 +331,10 @@ function drawAllHouses() {
 
 function nameTown() {
     var nameListPart01 = ["Stone", "Fire", "Gold", "Steel", "Dirt", "Grain", "Feild"];
-    var nameListPart02 = ["Town", "City", "Hearth", "Farm", "Home"]
-    var randomName = nameListPart01[0, randomNumber(nameListPart01.length)]
+    var nameListPart02 = ["Town", "City", "Hearth", "Farm", "Home"];
+    var randomName = nameListPart01[randomNumber(0, nameListPart01.length-1)] + nameListPart02[randomNumber(0, nameListPart02.length-1)];
+    setText("townTrueName", "Town name: " + randomName);
+  
 }
 
 hide();
@@ -340,3 +343,4 @@ drawGrass();
 //drawDevGrid(); //This will be commented out in the finale version
 drawAllRoads();
 drawAllHouses();
+nameTown();

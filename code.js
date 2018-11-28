@@ -179,26 +179,31 @@ function ranPostion() {
     moveTo(randomNumber(0, 319), randomNumber(0, 449));
 }
 
-/**
- * Draws a grass background.
- * 
- * @author: Nathan
- */
-function drawGrass() {
+
+function drawGrass() { //Draws a grass background - Clayton Ramey
     centerTurtle();
     penDown();
-    penRGB(backgroundColor[0], backgroundColor[1], backgroundColor[2]);
+    penRGB(0, 220, 0);
     dot(1000);
-    for (var g = 0; g < maxDarkGrass; g++) {
-        ranPostion();
+    maxDarkGrass = randomNumber (200,300);
+    for (g =0; g < maxDarkGrass; g++)  {
+        ranPosition();
         penDown();
-        penRGB(darkGrassColorA[0], darkGrassColorA[1], darkGrassColorA[2], darkGrassColorA[3]);
-        dot(randomNumber(1, 2.5));
+        penRGB(0, 70, 0, .8);
+        dot (randomNumber(1.5, 3));
     }
 }
-
-
-
+function drawRocks() { //Draws textured rocks in the background -Clayton Ramey
+  
+  centerTurtle();
+  var maxRocks = randomNumber(10, 25);
+  for (var g = 0; g < maxRocks; g++) {
+ ranPostion();
+ penDown();
+ penRGB(randomNumber(20, 40), randomNumber(20, 40), randomNumber(20, 40));
+ dot(randomNumber(2, 12));
+  }
+}
 /**
  * Function to simplify the drawing of the house background for House01.
  * 

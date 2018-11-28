@@ -330,5 +330,46 @@ drawDevGrid(); //This will be commented out in the finale version
 drawAllRoads();
 drawAllHouses();
 
+/**
+ * Object to contain details about an object with collision.
+ * 
+ * @author: Tanner
+ */
+var CollisionObject = {
+  x: 0,
+  y: 0,
+  radius: 0,
+  
+  setProperties: function(x, y, radius) {
+    this.x = x;
+    this.y = y;
+    this.radius = radius;
+  },
+  
+  getProperties: function() {
+    return [ this.x, this.y, this.radius ];
+  },
+  
+  getCollision: function(x, y, radius) {
+    return Math.abs(this.radius - radius) <= Math.sqrt((this.x - x)^2 + (this.y - y)^2) <= (this.radius + radius);
+  }
+};
 
-
+/**
+ * Object container for CollisionObjects.
+ * 
+ * @author: Tanner
+ */
+var Collision = {
+  objects: new Array(0),
+  
+  isCollision: function(x, y, radius) {
+    this.objects.forEach(function(object) {
+      if(object.getCollision(x, y, radius)) {
+        return true;
+      }
+    });
+    
+    return false;
+  }
+};

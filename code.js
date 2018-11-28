@@ -128,6 +128,7 @@ function drawRoad() {
  * Draws a center peice for the town.
  */
 function drawRoadCenter() {
+    centerTurtle();
     penDown();
     penRGB(roadCenterColor[0], roadCenterColor[1], roadCenterColor[2]);
     for (var i = 0; i < 4; i++) { // Draw road outline
@@ -177,8 +178,6 @@ function drawAllRoads() {
         centerTurtle();
         ranRoad();
     }
-    centerTurtle();
-    drawRoadCenter();
 }
 
 /**
@@ -343,4 +342,5 @@ drawGrass();
 //drawDevGrid(); //This will be commented out in the finale version
 drawAllRoads();
 drawAllHouses();
+drawRoadCenter();
 nameTown();

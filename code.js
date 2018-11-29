@@ -449,6 +449,6 @@ drawGrass();
 drawRocks();
 if(debug) { drawDevGrid(); }
 drawAllRoads();
-drawAllHouses();
 drawRoadCenter();
+drawAllHouses();
 nameTown();

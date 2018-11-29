@@ -13,11 +13,11 @@
     var maxDarkGrass        = randomNumber(200, 300); // Amount of dark grass to draw on background layer.
 
     // Colors
-    var backgroundColor     = [0, 220, 0];      // HEX: #00FF00 - Bright green            - https://www.colorcodehex.com/00ff00/
+    var backgroundColor     = [0, 175, 0];      // HEX: #00FF00 - Bright green            - https://www.colorcodehex.com/00ff00/
     var roadCenterColor     = [218, 165, 32];   // HEX: #DAA520 - Light brown             - https://www.colorcodehex.com/daa520/
     var penDefaultColor     = [0, 0, 0];        // HEX: #000000 - Black                   - https://www.colorcodehex.com/000000/
     var roadMiddleColor     = [139, 69, 19];    // HEX: #8B4513 - Dark brown              - https://www.colorcodehex.com/8b4513/
-    var darkGrassColorA     = [0, 70, 0, 0.7]; // HEX: #006400 - Dark green, 70% opacity - https://www.colorcodehex.com/006400/
+    var darkGrassColorA     = [0, 100, 0, 0.7]; // HEX: #006400 - Dark green, 70% opacity - https://www.colorcodehex.com/006400/
     var wellColor01         = [97, 97, 97];     // HEX: #616161 - Gray                    - https://www.colorcodehex.com/616161/
     var wellColor02         = [41, 41, 96];     // HEX: #292960 - Dark Blue               - https://www.colorcodehex.com/292960/
     var drawHouse01Color01  = [150, 111, 51];   // HEX: #966f33 - Wood Brown              - https://www.colorcodehex.com/966f33/
@@ -190,7 +190,6 @@ function drawRoadCenter() {
         (25 / 2) + 5                //  Calculate the radii from the diameter (25) and add a buffer of five units around the well
     );    
     
-    //castle();                       // Draw castle while turtle is still in the center of the scene
 }
  //this is a castle wall
 function castle() {
@@ -319,12 +318,14 @@ function drawGrass() {
         ranPosition();
         penDown();
         penRGB(darkGrassColorA[0], darkGrassColorA[1], darkGrassColorA[2], darkGrassColorA[3]);
-        dot(randomNumber(1.5, 3));
+        var dotBaseSize = randomNumber(1, 2.1);
+        for(var i = 1; i < 5; i++) {
+          dot((dotBaseSize * (i/dotBaseSize))*dotBaseSize);
+        }
     }
 }
 
 function drawRocks() { //Draws textured rocks in the background -Clayton Ramey
-  
   centerTurtle();
   var maxRocks = randomNumber(10, 25);
   for (var g = 0; g < maxRocks; g++) {
@@ -332,26 +333,24 @@ function drawRocks() { //Draws textured rocks in the background -Clayton Ramey
       penDown();
       penRGB(randomNumber(50, 70), randomNumber(80, 90), randomNumber(90, 115));
       dot(randomNumber(5, 15));
-  rockChance();
+      rockChance();
   }
 }
 
 function rockChance() { //Creates a chance for unique rocks -Clayton Ramey
-var chance = randomNumber(1, 8);
-if (chance === 1) {
-  turnRight(randomNumber(1, 360));
-  moveForward(randomNumber(6, 10));
-  dot(randomNumber(5, 15));
-  turnTo(0);
-}
-
+    var chance = randomNumber(1, 8);
+    if (chance === 1) {
+      turnRight(randomNumber(1, 360));
+      moveForward(randomNumber(6, 10));
+      dot(randomNumber(5, 15));
+      turnTo(0);
+    }
 }
 
 /**
  * Function to simplify the drawing of the house background for House01.
  * 
  * @author: Nathan
- * @WIP
  */
 function drawHouse01Inside(len) {
     for (var i = 0; i < len; i++) {
@@ -458,7 +457,7 @@ function drawHouse01() {
 }
 
 function drawAllHouses() {
-    penWidth(1);
+    penWidth(3);
     var maxHouses = randomNumber(1, 10);
     for (var q = 0; q < maxHouses; q++) {
         ranTurtle();
@@ -472,12 +471,6 @@ function drawAllHouses() {
     }
 }
 
-/**
- * Names the town with a random name.
- * 
- * @author: Nathan
- * @Only works on Code.org as of 11/28/2018.
- */
 function nameTown() {
     var nameListPart01 = ["Stone", "Fire", "Gold", "Steel", "Dirt", "Grain", "Feild"];
     var nameListPart02 = ["Town", "City", "Hearth", "Farm", "Home"];
@@ -575,7 +568,6 @@ var Collision = {
 };
 
 hide();
-
 drawGrass();
 if(debug) { drawDevGrid(); }
 drawAllRoads();

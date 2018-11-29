@@ -13,11 +13,11 @@
     var maxDarkGrass        = randomNumber(200, 300); // Amount of dark grass to draw on background layer.
 
     // Colors
-    var backgroundColor     = [0, 255, 0];      // HEX: #00FF00 - Bright green            - https://www.colorcodehex.com/00ff00/
+    var backgroundColor     = [0, 220, 0];      // HEX: #00FF00 - Bright green            - https://www.colorcodehex.com/00ff00/
     var roadCenterColor     = [218, 165, 32];   // HEX: #DAA520 - Light brown             - https://www.colorcodehex.com/daa520/
     var penDefaultColor     = [0, 0, 0];        // HEX: #000000 - Black                   - https://www.colorcodehex.com/000000/
     var roadMiddleColor     = [139, 69, 19];    // HEX: #8B4513 - Dark brown              - https://www.colorcodehex.com/8b4513/
-    var darkGrassColorA     = [0, 100, 0, 0.5]; // HEX: #006400 - Dark green, 50% opacity - https://www.colorcodehex.com/006400/
+    var darkGrassColorA     = [0, 70, 0, 0.7]; // HEX: #006400 - Dark green, 70% opacity - https://www.colorcodehex.com/006400/
     var wellColor01         = [97, 97, 97];     // HEX: #616161 - Gray                    - https://www.colorcodehex.com/616161/
     var wellColor02         = [41, 41, 96];     // HEX: #292960 - Dark Blue               - https://www.colorcodehex.com/292960/
     var drawHouse01Color01  = [150, 111, 51];   // HEX: #966f33 - Wood Brown              - https://www.colorcodehex.com/966f33/
@@ -101,6 +101,35 @@ function drawDevGrid() {
         turnRight();
     }
 }
+
+//this is a castle wall
+  function castle() {
+     getDirection();
+    var trumpsbaby=randomNumber(1,3 );
+if (trumpsbaby===2){
+  var r1=105;
+var g1=140;
+var u1=139;
+}
+
+if (trumpsbaby===3){
+  var r1=89;
+var g1=29;
+var u1=29;
+}
+if (trumpsbaby>=2) {
+  moveTo(27,27);
+penDown();
+    penWidth(25);
+  penRGB(r1, g1, u1);
+      for (var i = 0; i < 4; i++) {
+         moveForward(-396);
+   turnRight(90);
+   moveForward(266);
+   turnRight(90);
+      }
+     penUp();
+}}
 
 /**
  * Draw road function to draw the base module of every road.
@@ -188,35 +217,7 @@ function drawRoadCenter() {
         getX(),                     // Use our current X coordinate as the X value
         getY(),                     //              ^^ Y coordinate as the Y value
         (25 / 2) + 5                //  Calculate the radii from the diameter (25) and add a buffer of five units around the well
-    );  
-    //this is a castle wall
-  function castle() {
-     getDirection();
-    var trumpsbaby=randomNumber(1,3 );
-if (trumpsbaby===2){
-  var r1=105;
-var g1=140;
-var u1=139;
-}
-
-if (trumpsbaby===3){
-  var r1=89;
-var g1=29;
-var u1=29;
-}
-if (trumpsbaby>=2) {
-  moveTo(27,27);
-penDown();
-    penWidth(25);
-  penRGB(r1, g1, u1);
-      for (var i = 0; i < 4; i++) {
-         moveForward(-396);
-   turnRight(90);
-   moveForward(266);
-   turnRight(90);
-      }
-     penUp();
-}}
+    );                              
 }
 
 /**
@@ -276,7 +277,7 @@ function drawGrass() {
         ranPosition();
         penDown();
         penRGB(darkGrassColorA[0], darkGrassColorA[1], darkGrassColorA[2], darkGrassColorA[3]);
-        dot(randomNumber(1, 2.5));
+        dot(randomNumber(1.5, 3));
     }
 }
 
@@ -287,9 +288,21 @@ function drawRocks() { //Draws textured rocks in the background -Clayton Ramey
   for (var g = 0; g < maxRocks; g++) {
       ranPosition();
       penDown();
-      penRGB(randomNumber(20, 40), randomNumber(20, 40), randomNumber(20, 40));
-      dot(randomNumber(2, 12));
+      penRGB(randomNumber(50, 70), randomNumber(80, 90), randomNumber(90, 115));
+      dot(randomNumber(5, 15));
+  rockChance();
   }
+}
+
+function rockChance() { //Creates a chance for unique rocks -Clayton Ramey
+var chance = randomNumber(1, 8);
+if (chance === 1) {
+  turnRight(randomNumber(1, 360));
+  moveForward(randomNumber(6, 10));
+  dot(randomNumber(5, 15));
+  turnTo(0);
+}
+
 }
 
 /**

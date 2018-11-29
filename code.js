@@ -350,7 +350,6 @@ if (chance === 1) {
  * Function to simplify the drawing of the house background for House01.
  * 
  * @author: Nathan
- * @WIP
  */
 function drawHouse01Inside(len) {
     for (var i = 0; i < len; i++) {
@@ -457,7 +456,7 @@ function drawHouse01() {
 }
 
 function drawAllHouses() {
-    penWidth(1);
+    penWidth(3);
     var maxHouses = randomNumber(1, 10);
     for (var q = 0; q < maxHouses; q++) {
         ranTurtle();
@@ -569,9 +568,9 @@ var Collision = {
 
 hide();
 drawGrass();
-drawRocks();
 if(debug) { drawDevGrid(); }
 drawAllRoads();
+drawRocks();
 drawRoadCenter();
 drawAllHouses();
 centerTurtle();

@@ -146,24 +146,49 @@ function drawRoad() {
  * Draws a center peice for the town.
  */
 function drawRoadCenter() {
-    centerTurtle();
-    penDown();
-    penRGB(roadCenterColor[0], roadCenterColor[1], roadCenterColor[2]);
-    for (var i = 0; i < 4; i++) { // Draw road outline
-        moveForward(roadSize);
-        turnRight();
+    centerTurtle();                 // Center turtle in workspace
+    penDown();                      // Enable drawing
+    penRGB(
+        roadCenterColor[0],         //
+        roadCenterColor[1],         // Set the pen color to the road center color
+        roadCenterColor[2]          //
+    );
+    
+    for (var i = 0; i < 4; i++) {   //
+        moveForward(roadSize);      // Draw road outline
+        turnRight();                //
     }
-    moveForward(roadSize / 2);
-    turnRight();
-    moveForward(roadSize / 2);
-    drawRoadMiddle();
-    penRGB(roadMiddleColor[0], roadMiddleColor[1], roadMiddleColor[2]);
-    dot(25);
-    penRGB(wellColor01[0], wellColor01[1], wellColor01[2]);
-    dot(10);
-    penRGB(wellColor02[0], wellColor02[1], wellColor02[2]);
-    dot(7.5);
-    Collision.newObject(getX(), getY(), (25 / 2) + 5);
+    
+    moveForward(roadSize / 2);      //
+    turnRight();                    // Center turtle inside center road tile
+    moveForward(roadSize / 2);      //
+    
+    drawRoadMiddle();               // Fill the road tile
+    
+    penRGB(
+        roadMiddleColor[0],         //
+        roadMiddleColor[1],         // Set the pen color to the road middle color
+        roadMiddleColor[2]          //
+    );
+    dot(25);                        // Make a dot with a diameter of twenty-five to insure that the area around the well has road
+    penRGB(
+        wellColor01[0],             //
+        wellColor01[1],             // Set the pen color to the primary well color
+        wellColor01[2]              //
+    );
+    dot(10);                        // Make a dot with a diameter of ten, this is the stone surrounding the water
+    penRGB(
+        wellColor02[0],             //
+        wellColor02[1],             // Set the pen color to the secondary well color (the water)
+        wellColor02[2]              //
+    );
+    dot(7.5);                       // Make a dot with a diameter of seven-point-five, this is the water inside the well
+    
+    Collision.newObject(            // Create a new call to the collision subsystem...
+        getX(),                     // Use our current X coordinate as the X value
+        getY(),                     //              ^^ Y coordinate as the Y value
+        (25 / 2) + 5                //  Calculate the radii from the diameter (25) and add a buffer of five units around the well
+    );                              
 }
 
 /**

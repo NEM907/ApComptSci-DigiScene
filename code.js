@@ -147,6 +147,7 @@ function drawRoadCenter() {
     dot(10);
     penRGB(wellColor02[0], wellColor02[1], wellColor02[2]);
     dot(7.5);
+    Collision.newObject(getX(), getY(), (25 / 2) + 5);
 }
 
 /**
@@ -261,7 +262,8 @@ function fillHouse01() {
 /**
  * Draws a house.
  * 
- * @author: Nathan
+ * @author: Nathan, Tanner
+ * @returns Boolean true if house was successfully made, false if it couldn't be made in that position.
  * @WIP
  */
 function drawHouse01() {
@@ -272,6 +274,15 @@ function drawHouse01() {
     turnRight(45);
     moveForward(house01Half);
     var buildCenter = [getX(), getY()]; //The center of the house.
+
+    if(Collision.isCollision(getX(), getY(), (house01Half / 2) + 25)) {
+      if(debug) { console.log("HOUSE C-CHECK: failed, house collision at " + getX() + ", " + getY()); }
+      return false; 
+    } else {
+      if(debug) { console.log("HOUSE C-CHECK: created new house at " + getX() + ", " + getY()); }
+      Collision.newObject(getX(), getY(), house01Half / 2);
+    }
+
     turnLeft(45);
     moveTo(buildCenter[0], buildCenter[1]);
     penRGB(drawHouse01Color02[0], drawHouse01Color02[1], drawHouse01Color02[2]);
@@ -318,7 +329,7 @@ function drawHouse01() {
     moveForward(house01Half);
     turnLeft(45);
     moveTo(buildStart[0], buildStart[1]);
-
+    return true;
 
 }
 
@@ -326,7 +337,13 @@ function drawAllHouses() {
     var maxHouses = randomNumber(1, 10);
     for (var q = 0; q < maxHouses; q++) {
         ranTurtle();
-        drawHouse01();
+        var houseSuccess = drawHouse01();
+        if(!houseSuccess) {
+          ranTurtle();
+          while(!drawHouse01()) {
+            ranTurtle();
+          }
+        }
     }
 }
 

@@ -102,35 +102,6 @@ function drawDevGrid() {
     }
 }
 
-//this is a castle wall
-  function castle() {
-     getDirection();
-    var trumpsbaby=randomNumber(1,3 );
-if (trumpsbaby===2){
-  var r1=105;
-var g1=140;
-var u1=139;
-}
-
-if (trumpsbaby===3){
-  var r1=89;
-var g1=29;
-var u1=29;
-}
-if (trumpsbaby>=2) {
-  moveTo(27,27);
-penDown();
-    penWidth(25);
-  penRGB(r1, g1, u1);
-      for (var i = 0; i < 4; i++) {
-         moveForward(-396);
-   turnRight(90);
-   moveForward(266);
-   turnRight(90);
-      }
-     penUp();
-}}
-
 /**
  * Draw road function to draw the base module of every road.
  */
@@ -217,7 +188,35 @@ function drawRoadCenter() {
         getX(),                     // Use our current X coordinate as the X value
         getY(),                     //              ^^ Y coordinate as the Y value
         (25 / 2) + 5                //  Calculate the radii from the diameter (25) and add a buffer of five units around the well
-    );                              
+    );  
+    //this is a castle wall
+  function castle() {
+     getDirection();
+    var trumpsbaby=randomNumber(1,3 );
+if (trumpsbaby===2){
+  var r1=105;
+var g1=140;
+var u1=139;
+}
+
+if (trumpsbaby===3){
+  var r1=89;
+var g1=29;
+var u1=29;
+}
+if (trumpsbaby>=2) {
+  moveTo(27,27);
+penDown();
+    penWidth(25);
+  penRGB(r1, g1, u1);
+      for (var i = 0; i < 4; i++) {
+         moveForward(-396);
+   turnRight(90);
+   moveForward(266);
+   turnRight(90);
+      }
+     penUp();
+}}
 }
 
 /**

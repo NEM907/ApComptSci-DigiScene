@@ -190,7 +190,6 @@ function drawRoadCenter() {
         (25 / 2) + 5                //  Calculate the radii from the diameter (25) and add a buffer of five units around the well
     );    
     
-    //castle();                       // Draw castle while turtle is still in the center of the scene
 }
  //this is a castle wall
 function castle() {

@@ -458,6 +458,7 @@ function drawHouse01() {
 }
 
 function drawAllHouses() {
+    penWidth(1);
     var maxHouses = randomNumber(1, 10);
     for (var q = 0; q < maxHouses; q++) {
         ranTurtle();

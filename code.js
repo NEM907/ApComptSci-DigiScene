@@ -4,6 +4,8 @@
 
 
 // Variable Declarations
+    var debug = false;
+
     var gridSize = 10;
     var roadSize = 10;
 
@@ -335,6 +337,89 @@ function nameTown() {
     setText("townTrueName", "Town name: " + randomName);
   
 }
+
+/**
+ * Object to contain details about an object with collision.
+ * 
+ * @author: Tanner
+ */
+function CollisionObject(x, y, radius) {
+  this.x = x,
+  this.y = y,
+  this.radius = radius,
+  
+  this.setProperties = function(x, y, radius) {
+    this.x = x;
+    this.y = y;
+    this.radius = radius;
+  },
+  
+  this.getProperties = function() {
+    return [ this.x, this.y, this.radius ];
+  },
+  
+  this.getCollision = function(x, y, radius) {
+    var dx = Math.abs(x - this.x),
+        dy = Math.abs(y - this.y),
+        distance = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+    
+    if(debug) { console.log("COLLISION CHECK: dx=" + dx + " dy=" + dy + " distance=" + distance + "...<=...comparator=" + (this.radius + radius)); }
+    
+    if(distance <= (this.radius + radius)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+}
+
+/**
+ * Object container for CollisionObjects.
+ * 
+ * @author: Tanner
+ */
+var Collision = {
+  objects: [],
+  
+  isCollision: function(x, y, radius) {
+    var collisionDetected = false;
+    this.objects.forEach(function(object) {
+      if(object.getCollision(x, y, radius)) {
+        collisionDetected = true;
+        if(debug) {
+          createCanvas("screen1");
+          circle(x, y, radius);
+          circle(x, y, radius + 25);
+        }
+      }
+    });
+    
+    return collisionDetected;
+  },
+  
+  newObject: function(x, y, radius) {
+    var newCollisionObject = new CollisionObject(x, y, radius);
+      if(debug) { 
+        createCanvas("screen1", 320, 450); circle(x, y, radius); circle(x, y, radius + 25);
+        console.log("COLLISION OBJ: new collision: " + newCollisionObject.getProperties());
+      }
+    this.objects.push(newCollisionObject);
+  },
+  
+  getKeys: function() {
+		 return Object.keys(this);
+	},
+
+	getValues: function() {
+	  return this.getKeys().map(function(key) {
+	    return this[key];
+	  });
+	},
+	
+	getChildObjects: function() {
+	  return this.objects;
+	}
+};
 
 hide();
 

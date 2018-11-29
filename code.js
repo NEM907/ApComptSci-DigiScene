@@ -17,7 +17,7 @@
     var roadCenterColor     = [218, 165, 32];   // HEX: #DAA520 - Light brown             - https://www.colorcodehex.com/daa520/
     var penDefaultColor     = [0, 0, 0];        // HEX: #000000 - Black                   - https://www.colorcodehex.com/000000/
     var roadMiddleColor     = [139, 69, 19];    // HEX: #8B4513 - Dark brown              - https://www.colorcodehex.com/8b4513/
-    var darkGrassColorA     = [0, 70, 0, 0.7]; // HEX: #006400 - Dark green, 70% opacity - https://www.colorcodehex.com/006400/
+    var darkGrassColorA     = [0, 70, 0, 0.7];  // HEX: #006400 - Dark green, 70% opacity - https://www.colorcodehex.com/006400/
     var wellColor01         = [97, 97, 97];     // HEX: #616161 - Gray                    - https://www.colorcodehex.com/616161/
     var wellColor02         = [41, 41, 96];     // HEX: #292960 - Dark Blue               - https://www.colorcodehex.com/292960/
     var drawHouse01Color01  = [150, 111, 51];   // HEX: #966f33 - Wood Brown              - https://www.colorcodehex.com/966f33/

@@ -1,28 +1,29 @@
 //This is the Master File that will be ran in Code.org
 //When adding code please add a comment above it explaining what the code does and also your name 
 //Good Luck Have Fun (:
+/**
+ *      //////////////////// RUNTIME VARIABLE DECLARATIONS ////////////////////
+ **/
+    var debug               = false;
 
+    var gridSize            = 10;
+    var roadSize            = 10;
 
-// Variable Declarations
-    var debug = false;
-
-    var gridSize = 10;
-    var roadSize = 10;
-
-    var roadsPerPath = randomNumber(200, 500); // Number of roads to draw.
-    var maxDarkGrass = randomNumber(200, 300); // Amount of dark grass to draw on background layer.
+    var roadsPerPath        = randomNumber(200, 500); // Number of roads to draw.
+    var maxDarkGrass        = randomNumber(200, 300); // Amount of dark grass to draw on background layer.
 
     // Colors
-    var backgroundColor = [0, 255, 0]; // HEX: #00FF00 - Bright green - https://www.colorcodehex.com/00ff00/
-    var roadCenterColor = [218, 165, 32];  // HEX: #DAA520 - Light brown - https://www.colorcodehex.com/daa520/
-    var penDefaultColor = [0, 0, 0]; // HEX: #000000 - Black - https://www.colorcodehex.com/000000/
-    var roadMiddleColor = [139, 69, 19]; // HEX: #8B4513 - Dark brown - https://www.colorcodehex.com/8b4513/
-    var darkGrassColorA = [0, 100, 0, 0.5]; // HEX: #006400 - Dark green, 50% opacity - https://www.colorcodehex.com/006400/
-    var wellColor01 = [97, 97, 97]; // HEX: #616161 - Gray - https://www.colorcodehex.com/616161/
-    var wellColor02 = [41, 41, 96]; // HEX: #292960 - Dark Blue - https://www.colorcodehex.com/292960/
-    var drawHouse01Color01 = [150, 111, 51]; // HEX: #966f33 - Wood Brown - https://www.colorcodehex.com/966f33/
-    var drawHouse01Color02 = [112, 83, 38]; // HEX: #705326 - Dark Wood Brown - https://www.colorcodehex.com/705326/
-// End of Variable Declarations
+    var backgroundColor     = [0, 255, 0];      // HEX: #00FF00 - Bright green            - https://www.colorcodehex.com/00ff00/
+    var roadCenterColor     = [218, 165, 32];   // HEX: #DAA520 - Light brown             - https://www.colorcodehex.com/daa520/
+    var penDefaultColor     = [0, 0, 0];        // HEX: #000000 - Black                   - https://www.colorcodehex.com/000000/
+    var roadMiddleColor     = [139, 69, 19];    // HEX: #8B4513 - Dark brown              - https://www.colorcodehex.com/8b4513/
+    var darkGrassColorA     = [0, 100, 0, 0.5]; // HEX: #006400 - Dark green, 50% opacity - https://www.colorcodehex.com/006400/
+    var wellColor01         = [97, 97, 97];     // HEX: #616161 - Gray                    - https://www.colorcodehex.com/616161/
+    var wellColor02         = [41, 41, 96];     // HEX: #292960 - Dark Blue               - https://www.colorcodehex.com/292960/
+    var drawHouse01Color01  = [150, 111, 51];   // HEX: #966f33 - Wood Brown              - https://www.colorcodehex.com/966f33/
+    var drawHouse01Color02  = [112, 83, 38];    // HEX: #705326 - Dark Wood Brown         - https://www.colorcodehex.com/705326/
+
+/** /////////////////////////////////////////////////////////////////////////// **/
 
 
 
@@ -32,11 +33,15 @@
  * @author: Nathan
  */
 function penDefault() {
-    penRGB(penDefaultColor[0], penDefaultColor[1], penDefaultColor[2]);
-    penWidth(1);
-    penDown();
+    penRGB(
+        penDefaultColor[0],     //
+        penDefaultColor[1],     // Set the pen to the default color
+        penDefaultColor[2]      //
+    );
+    penWidth(1);                // Set the pen width to the default value (1)
+    penDown();                  // Enable the pen to draw
     hide();
-    speed(100);
+    speed(100);                 // Enable full speed runtime execution
 }
 
 
@@ -44,18 +49,21 @@ function penDefault() {
  * Centers the Turtle according to the grid size and faces the turtle up.
  */
 function centerTurtle() {
-    penUp();
-    moveTo(160, 230);
-    turnTo(0);
+    penUp();                    // Disable drawing
+    moveTo(160, 230);           // Move to center of workspace environment
+    turnTo(0);                  // Turn to starting position (0 deg, North)
 }
 
 /**
  * Places the Turtle in a random postion and turns to a random direction.
  */
 function ranTurtle() {
-    penUp();
-    moveTo(randomNumber(0, 320), randomNumber(0,449));
-    turnTo(randomNumber(0,359));
+    penUp();                        // Disable drawing
+    moveTo(
+        randomNumber(0, 320),       // Move to a random position in the workspace
+        randomNumber(0,449)
+    );
+    turnTo(randomNumber(0,359));    // Turn to a random angle
 }
 
 /**
@@ -98,10 +106,14 @@ function drawDevGrid() {
  * Draw road function to draw the base module of every road.
  */
 function drawRoadMiddle() {
-    penDown();
-    penRGB(roadMiddleColor[0], roadMiddleColor[1], roadMiddleColor[2]);
-    dot(roadSize / 2); //Fills in the road
-    penUp();
+    penDown();                  // Enable drawing
+    penRGB(
+        roadMiddleColor[0],     //
+        roadMiddleColor[1],     // Set the pen color to the middle of the road color
+        roadMiddleColor[2]      //
+    );
+    dot(roadSize / 2);          // Flood fills center of road using the color
+    penUp();                    // Lifts pen and disables drawing
 }
 
 /**
@@ -110,10 +122,14 @@ function drawRoadMiddle() {
  * @author: Nathan
  */
 function drawRoad() {
-    penDown();
-    penWidth(3);
-    penRGB(roadMiddleColor[0], roadMiddleColor[1], roadMiddleColor[2]);
-    for (var i = 0; i < 4; i++) { //Draw road outline
+    penDown();                      // Place the pen down and enable drawing
+    penWidth(3);                    // Set the pen width to three, this is three times the default value
+    penRGB(
+        roadMiddleColor[0],         //
+        roadMiddleColor[1],         // Set the pen color to the road middle color
+        roadMiddleColor[2]          //
+    );
+    for (var i = 0; i < 4; i++) {   // Draw road outline
         moveForward(roadSize);
         turnRight();
     }

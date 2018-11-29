@@ -17,7 +17,7 @@
     var roadCenterColor     = [218, 165, 32];   // HEX: #DAA520 - Light brown             - https://www.colorcodehex.com/daa520/
     var penDefaultColor     = [0, 0, 0];        // HEX: #000000 - Black                   - https://www.colorcodehex.com/000000/
     var roadMiddleColor     = [139, 69, 19];    // HEX: #8B4513 - Dark brown              - https://www.colorcodehex.com/8b4513/
-    var darkGrassColorA     = [0, 70, 0, 0.7];  // HEX: #006400 - Dark green, 70% opacity - https://www.colorcodehex.com/006400/
+    var darkGrassColorA     = [0, 70, 0, 0.7]; // HEX: #006400 - Dark green, 70% opacity - https://www.colorcodehex.com/006400/
     var wellColor01         = [97, 97, 97];     // HEX: #616161 - Gray                    - https://www.colorcodehex.com/616161/
     var wellColor02         = [41, 41, 96];     // HEX: #292960 - Dark Blue               - https://www.colorcodehex.com/292960/
     var drawHouse01Color01  = [150, 111, 51];   // HEX: #966f33 - Wood Brown              - https://www.colorcodehex.com/966f33/
@@ -101,35 +101,6 @@ function drawDevGrid() {
         turnRight();
     }
 }
-
-//this is a castle wall
-  function castle() {
-     getDirection();
-    var trumpsbaby=randomNumber(1,3 );
-if (trumpsbaby===2){
-  var r1=105;
-var g1=140;
-var u1=139;
-}
-
-if (trumpsbaby===3){
-  var r1=89;
-var g1=29;
-var u1=29;
-}
-if (trumpsbaby>=2) {
-  moveTo(27,27);
-penDown();
-    penWidth(25);
-  penRGB(r1, g1, u1);
-      for (var i = 0; i < 4; i++) {
-         moveForward(-396);
-   turnRight(90);
-   moveForward(266);
-   turnRight(90);
-      }
-     penUp();
-}}
 
 /**
  * Draw road function to draw the base module of every road.
@@ -217,7 +188,77 @@ function drawRoadCenter() {
         getX(),                     // Use our current X coordinate as the X value
         getY(),                     //              ^^ Y coordinate as the Y value
         (25 / 2) + 5                //  Calculate the radii from the diameter (25) and add a buffer of five units around the well
-    );                              
+    );    
+    
+    castle();                       // Draw castle while turtle is still in the center of the scene
+}
+ //this is a castle wall
+function castle() {
+      turnTo(0);
+      var trumpsbaby=randomNumber(1,3);
+      
+      var r1,
+          g1,
+          u1;
+      
+      if (trumpsbaby == 2){
+        r1=105;
+        g1=140;
+        u1=139;
+      }
+  
+      if (trumpsbaby == 3){
+        r1=89;
+        g1=29;
+        u1=29;
+      }
+      
+      if (trumpsbaby >= 2) {
+        moveTo(0,0);
+        penDown();
+        penWidth(25);
+        penRGB(r1, g1, u1);
+        for (var i = 0; i < 4; i++) {
+           moveForward(-450);
+           turnRight(90);
+           moveForward(320);
+           turnRight(90);
+        }
+        penUp();
+      }
+}
+
+/**
+ * Random road pathing.
+ * 
+ * @author: Nathan
+ */
+function ranRoad() {
+    for (var r = 0; r < roadsPerPath; r++) {
+        var direction = randomNumber(0, 3);
+        turnTo(90 * direction);
+        moveForward(roadSize);
+        drawRoad();
+    }
+}
+
+/**
+ * Draws all the roads in a random pattern.
+ * 
+ * @author: Nathan
+ */
+function drawAllRoads() {
+    centerTurtle();
+    turnTo(0);
+    moveForward(roadSize);
+    turnRight();
+    moveForward(roadSize);
+    turnLeft();
+    for (var q = 0; q < 4; q++) {
+        turnTo(90 * q);
+        centerTurtle();
+        ranRoad();
+    }
 }
 
 /**
@@ -534,4 +575,3 @@ drawAllRoads();
 drawRoadCenter();
 drawAllHouses();
 nameTown();
-castle();

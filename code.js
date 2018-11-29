@@ -568,7 +568,6 @@ var Collision = {
 };
 
 hide();
-castle();                       // Draw castle while turtle is still in the center of the scene
 drawGrass();
 drawRocks();
 if(debug) { drawDevGrid(); }
@@ -576,4 +575,5 @@ drawAllRoads();
 drawRoadCenter();
 drawAllHouses();
 centerTurtle();
+castle();                       // Draw castle while turtle is still in the center of the scene
 nameTown();

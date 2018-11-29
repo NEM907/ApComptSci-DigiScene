@@ -441,7 +441,8 @@ var Collision = {
 hide();
 
 drawGrass();
-//drawDevGrid(); //This will be commented out in the finale version
+drawRocks();
+if(debug) { drawDevGrid(); }
 drawAllRoads();
 drawAllHouses();
 drawRoadCenter();

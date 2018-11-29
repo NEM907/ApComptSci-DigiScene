@@ -224,6 +224,7 @@ function castle() {
            moveForward(320);
            turnRight(90);
         }
+        penDefault();
         penUp();
       }
 }

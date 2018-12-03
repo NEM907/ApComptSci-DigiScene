@@ -525,16 +525,22 @@ function CollisionObject(x, y, radius) {
   },
 
   this.getCollision = function(x, y, radius) {
-    var dx = Math.abs(x - this.x),
-        dy = Math.abs(y - this.y),
-        distance = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+    var dx = Math.abs(x - this.x),                                  // Distance between the provided X point and the collision X point
+        dy = Math.abs(y - this.y),                                  //                            ^^ Y point                ^^ Y point
+        distance = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));    // Distance formula: sqrt((dx^2) + (dy^2))
+                                                                    // ^ This is the distance between the origin of each circle
 
     if (debug) {
-      console.log("COLLISION CHECK: dx=" + dx + " dy=" + dy + " distance=" + distance + "...<=...comparator=" + (this.radius + radius));
+      console.log("COLLISION CHECK:" + 
+                  " dx=" + dx +
+                  " dy=" + dy +
+                  " distance=" + distance +
+                  "...<=...comparator=" + (this.radius + radius)
+                 );
     }
 
-    if (distance <= (this.radius + radius)) {
-      return true;
+    if (distance <= (this.radius + radius)) {                       // If the distance between the two circles is less than or equal
+      return true;                                                  // to their combined radii, a collision must occur
     } else {
       return false;
     }
@@ -552,7 +558,7 @@ var Collision = {
   isCollision: function(x, y, radius) {
     var collisionDetected = false;
     this.objects.forEach(function(object) {
-      if (object.getCollision(x, y, radius)) {
+      if(object.getCollision(x, y, radius)) {
         collisionDetected = true;
         if (debug) {
           createCanvas("screen1");
@@ -592,13 +598,15 @@ var Collision = {
   }
 };
 
-hide();
-drawGrass();
-if(debug) { drawDevGrid(); }
-drawAllRoads();
-drawRocks();
-drawRoadCenter();
-drawAllHouses();
-centerTurtle();
+hide();                         // Hide the turtle body
+drawGrass();                    // Draw the grass background
+if(debug) { drawDevGrid(); }    // (DEBUG) Draw grid over the viewplane
+drawAllRoads();                 // Activate the road drawing algorithm
+drawRocks();                    // Draw rocks
+drawRoadCenter();               // Draw the well in the center of the town
+drawAllHouses();                // Draw all the houses
+
+centerTurtle();                 // Return turtle to center
 castle();                       // Draw castle while turtle is still in the center of the scene
-nameTown();
+
+nameTown();                     // Generate a random name for the town.

@@ -34,14 +34,14 @@
  */
 function penDefault() {
     penRGB(
-        penDefaultColor[0],     //
-        penDefaultColor[1],     // Set the pen to the default color
-        penDefaultColor[2]      //
+        penDefaultColor[0],         //
+        penDefaultColor[1],         // Set the pen to the default color
+        penDefaultColor[2]          //
     );
-    penWidth(1);                // Set the pen width to the default value (1)
-    penDown();                  // Enable the pen to draw
-    hide();
-    speed(100);                 // Enable full speed runtime execution
+    penWidth(1);                    // Set the pen width to the default value (1)
+    penDown();                      // Enable the pen to draw
+    hide();                         // Hide the turtle itself
+    speed(100);                     // Enable full speed runtime execution
 }
 
 
@@ -49,9 +49,9 @@ function penDefault() {
  * Centers the Turtle according to the grid size and faces the turtle up.
  */
 function centerTurtle() {
-    penUp();                    // Disable drawing
-    moveTo(160, 230);           // Move to center of workspace environment
-    turnTo(0);                  // Turn to starting position (0 deg, North)
+    penUp();                        // Disable drawing
+    moveTo(160, 230);               // Move to center of workspace environment
+    turnTo(0);                      // Turn to starting position (0 deg, North)
 }
 
 /**
@@ -73,32 +73,46 @@ function ranTurtle() {
  * @author: Nathan
  */
 function drawDevGrid() {
-    penUp();
-    moveTo(0, 450);
-    penDefault();
-    for (var i = getX(); i < 321; i = getX()) { //Draws vertical lines
-        moveForward(450);
-        turnRight();
-        moveForward(gridSize);
-        turnRight();
-        moveForward(450);
-        turnLeft();
-        moveForward(gridSize);
-        turnLeft();
+    
+        // Vertical grid
+    
+    penUp();                                        // Disable drawing
+    moveTo(0, 450);                                 // Move to top left of screen
+    penDefault();                                   // Set pen to default values and enable drawing
+    
+    for (var i = getX(); i < 321; i = getX()) {     // Draws vertical lines
+        moveForward(450);                           //  Moves up by the height of the screen
+        
+        turnRight();                                //
+        moveForward(gridSize);                      //  Move turtle right based on gridSize on the top of the screen
+        turnRight();                                //
+        
+        moveForward(450);                           //  Move down by the height of the screen
+        
+        turnLeft();                                 //
+        moveForward(gridSize);                      //  Move turtle right based on gridSize on the bottom of the screen
+        turnLeft();                                 //
     }
-    penUp();
-    moveTo(0, 450);
-    penDefault();
-    turnRight();
-    for (i = getY(); i > 0; i = getY()) { //Draws horizontal lines
-        moveForward(320);
-        turnLeft();
-        moveForward(gridSize);
-        turnLeft();
-        moveForward(320);
-        turnRight();
-        moveForward(gridSize);
-        turnRight();
+    
+        // Horizontal grid
+    
+    penUp();                                        // Disable drawing
+    moveTo(0, 450);                                 // Move to top left of screen
+    penDefault();                                   // Set pen to default values and enable drawing
+    turnRight();                                    // Turn right, this rotates the grid by 90 degrees to generate horizontal lines
+    
+    for (i = getY(); i > 0; i = getY()) {           // Draws horizontal lines
+        moveForward(320);                           //  Moves across the width of the screen
+        
+        turnLeft();                                 //
+        moveForward(gridSize);                      //  Move turtle down based on the gridSize on the left side of the screen
+        turnLeft();                                 //
+        
+        moveForward(320);                           //  Moves across the width of the screen
+        
+        turnRight();                                //
+        moveForward(gridSize);                      //  Move turtle down based on the gridSize on the right side of the screen
+        turnRight();                                //
     }
 }
 
@@ -106,14 +120,14 @@ function drawDevGrid() {
  * Draw road function to draw the base module of every road.
  */
 function drawRoadMiddle() {
-    penDown();                  // Enable drawing
+    penDown();                      // Enable drawing
     penRGB(
-        roadMiddleColor[0],     //
-        roadMiddleColor[1],     // Set the pen color to the middle of the road color
-        roadMiddleColor[2]      //
+        roadMiddleColor[0],         //
+        roadMiddleColor[1],         // Set the pen color to the middle of the road color
+        roadMiddleColor[2]          //
     );
-    dot(roadSize / 2);          // Flood fills center of road using the color
-    penUp();                    // Lifts pen and disables drawing
+    dot(roadSize / 2);              // Flood fills center of road using the color
+    penUp();                        // Lifts pen and disables drawing
 }
 
 /**
@@ -129,17 +143,20 @@ function drawRoad() {
         roadMiddleColor[1],         // Set the pen color to the road middle color
         roadMiddleColor[2]          //
     );
-    for (var i = 0; i < 4; i++) {   // Draw road outline
-        moveForward(roadSize);
-        turnRight();
+    for (var i = 0; i < 4; i++) {   // Draw road outline (a square)
+        moveForward(roadSize);      //  Move forward by the size of a road tile
+        turnRight();                //  Turn right
     }
-    moveForward(roadSize / 2);
-    turnRight();
-    moveForward(roadSize / 2);
-    drawRoadMiddle();
-    moveForward(-roadSize / 2);
-    turnLeft();
-    moveForward(-roadSize / 2);
+    
+    moveForward(roadSize / 2);      //
+    turnRight();                    // Center turtle in middle of individual road tile
+    moveForward(roadSize / 2);      //
+    
+    drawRoadMiddle();               // Draw middle of the road once turtle is centered in middle of road tile
+    
+    moveForward( -(roadSize / 2) ); //
+    turnLeft();                     // Move back to origin from center of road tile
+    moveForward( -(roadSize / 2) ); //
 }
 
 /**
@@ -185,47 +202,55 @@ function drawRoadCenter() {
     dot(7.5);                       // Make a dot with a diameter of seven-point-five, this is the water inside the well
     
     Collision.newObject(            // Create a new call to the collision subsystem...
-        getX(),                     // Use our current X coordinate as the X value
-        getY(),                     //              ^^ Y coordinate as the Y value
+        getX(),                     //  Use our current X coordinate as the X value
+        getY(),                     //               ^^ Y coordinate as the Y value
         (25 / 2) + 5                //  Calculate the radii from the diameter (25) and add a buffer of five units around the well
     );    
     
 }
- //this is a castle wall
+
+/**
+ * Draw the castle walls.
+ */
 function castle() {
-      turnTo(0);
-      var trumpsbaby=randomNumber(1,3);
-      
-      var r1,
-          g1,
-          u1;
-      
-      if (trumpsbaby == 2){
-        r1=105;
-        g1=140;
-        u1=139;
-      }
-  
-      if (trumpsbaby == 3){
-        r1=89;
-        g1=29;
-        u1=29;
-      }
-      
-      if (trumpsbaby >= 2) {
-        moveTo(0,0);
+    var castleRed,
+        castleGreen,
+        castleBlue;
+    
+    function setCastleColor(red, green, blue) {
+        castleRed = red;
+        castleGreen = green;
+        castleBlue = blue;
+    }
+    
+    turnTo(0);
+    
+    switch (randomNumber(1, 3)) {
+        case 1:
+            setCastleColor(0, 0, 0);
+            break;
+        case 2:
+            setCastleColor(105, 140, 139);
+            break;
+        case 3:
+            setCastleColor(89, 29, 29);
+            break;
+    }
+
+    if (randomNumber(1, 3) >= 2) {
+        moveTo(0, 0);
         penDown();
         penWidth(25);
-        penRGB(r1, g1, u1);
+        penRGB(castleRed, castleGreen, castleBlue);
         for (var i = 0; i < 4; i++) {
-           moveForward(-450);
-           turnRight(90);
-           moveForward(320);
-           turnRight(90);
+            moveForward(-450);
+            turnRight(90);
+            moveForward(320);
+            turnRight(90);
         }
         penDefault();
         penUp();
-      }
+    }
 }
 
 /**

@@ -506,24 +506,40 @@ function nameTown() {
 
 /**
  * Object to contain details about an object with collision.
- * 
- * @author: Tanner
+ *
+ * @author Tanner
+ * @constructor
  */
 function CollisionObject(x, y, radius) {
+
+  /** @access private */
+  // X coordinate of the collision object
   this.x = x,
+      
+  /** @access private */
+  // Y coordinate of the collision object
   this.y = y,
+  
+  /** @access private */
+  // Radius of the collision object
   this.radius = radius,
 
+  /** @access public */
+  // Set the properties of the collision object, usually only used after the creation of the object
   this.setProperties = function(x, y, radius) {
     this.x = x;
     this.y = y;
     this.radius = radius;
   },
 
+  /** @access public */
+  // Get the properties of the collision object
   this.getProperties = function() {
     return [this.x, this.y, this.radius];
   },
 
+  /** @access public */
+  // Check if there is a between a provided collision vector and this collision
   this.getCollision = function(x, y, radius) {
     var dx = Math.abs(x - this.x),                                  // Distance between the provided X point and the collision X point
         dy = Math.abs(y - this.y),                                  //                            ^^ Y point                ^^ Y point
@@ -548,38 +564,62 @@ function CollisionObject(x, y, radius) {
 }
 
 /**
- * Object container for CollisionObjects.
+ * Primary Collision API and CollisionObject container.
  * 
- * @author: Tanner
+ * @author Tanner
  */
 var Collision = {
+
+  /** @access private */
+  // Keep track of all currently registered collisions for this instance.
   objects: [],
 
+  /**
+   * Check if the given collision would collide with any other collisions in the API.
+   * 
+   * @access public
+   *
+   * @param {number} [x=0] The X coordinate of where to check for a collision.
+   * @param {number} [y=0] The Y coordinate of where to check for a collision.
+   * @param {number} [radius=25] The radius of the collision circle to check.
+   *
+   * @returns {boolean} Returns true if the specified collision collides with another already existing collision.
+   */
   isCollision: function(x, y, radius) {
     var collisionDetected = false;
-    this.objects.forEach(function(object) {
-      if(object.getCollision(x, y, radius)) {
-        collisionDetected = true;
-        if (debug) {
-          createCanvas("screen1");
-          circle(x, y, radius);
-          circle(x, y, radius + 25);
-        }
-      }
-    });
+    try {
+      this.objects.forEach(function(object) {
+          collisionDetected = ( object.getCollision(x, y, radius) ? true : false ) || collisionDetected;
+        });
+    } catch(e) {
+        console.log("Error: Exception while checking object collision.\n" +
+                    "Exception: " + e);
+    }
 
     return collisionDetected;
   },
 
+  /**
+   * Add a new object with collision to the CollisionAPI
+   * 
+   * @access public
+   * 
+   * @param {number} [x=0] The X coordinate of the collision to create.
+   * @param {number} [y=0] The Y coordinate of the collision to create.
+   * @param {number} [radius=25] The radius of the collision to create. Collisions are circles.
+   *
+   * @returns {boolean} If true, the object was created successfully.
+   */
   newObject: function(x, y, radius) {
-    var newCollisionObject = new CollisionObject(x, y, radius);
-    if (debug) {
-      createCanvas("screen1", 320, 450);
-      circle(x, y, radius);
-      circle(x, y, radius + 25);
-      console.log("COLLISION OBJ: new collision: " + newCollisionObject.getProperties());
-    }
-    this.objects.push(newCollisionObject);
+	try {
+		this.objects.push(new CollisionObject(x, y, radius));
+	} catch(e) {
+		console.log("Error: Exception while creating new collision object.\n" +
+					"Parameters given: x=" + x + ", y=" + y + ", radius=" + radius + "\n" +
+					"Exception was as follows: " + e);
+		return false;
+	}
+	return true;
   },
 
   getKeys: function() {
@@ -593,10 +633,16 @@ var Collision = {
       });
   },
 
+  /**
+   * Returns all CollisionObjects contained within the CollisionAPI.
+   * 
+   * @deprecated
+   * @returns {Array[]} CollisionObject
+   */
   getChildObjects: function() {
     return this.objects;
   }
-};
+}
 
 hide();                         // Hide the turtle body
 drawGrass();                    // Draw the grass background
